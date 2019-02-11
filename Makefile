@@ -1,3 +1,5 @@
+export DOCKER_REPO=flydiverny
+
 include ./docker.mk
 include ./help.mk
 

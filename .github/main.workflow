@@ -1,23 +1,25 @@
 workflow "Build and Publish" {
   on = "push"
-  resolves = "Docker Publish"
+  resolves = "Publish"
 }
 
-action "Docker Lint" {
-  uses = "docker://replicated/dockerfilelint"
-  args = ["Dockerfile"]
+action "Lint" {
+  uses = "actions/action-builder/shell@master"
+  runs = "make"
+  args = "lint"
+}
+
+action "Test" {
+  uses = "actions/action-builder/shell@master"
+  runs = "make"
+  args = "test"
 }
 
 action "Build" {
-  needs = ["Docker Lint"]
-  uses = "actions/docker/cli@master"
-  args = "build -t npm ."
-}
-
-action "Docker Tag" {
-  needs = ["Build"]
-  uses = "actions/docker/tag@master"
-  args = "npm github/npm --no-latest"
+  needs = ["Lint", "Test"]
+  uses = "actions/action-builder/docker@master"
+  runs = "make"
+  args = "build"
 }
 
 action "Publish Filter" {
@@ -32,8 +34,9 @@ action "Docker Login" {
   secrets = ["DOCKER_USERNAME", "DOCKER_PASSWORD"]
 }
 
-action "Docker Publish" {
-  needs = ["Docker Tag", "Docker Login"]
-  uses = "actions/docker/cli@master"
-  args = "push github/npm"
+action "Publish" {
+  needs = ["Docker Login"]
+  uses = "actions/action-builder/docker@master"
+  runs = "make"
+  args = "publish"
 }
