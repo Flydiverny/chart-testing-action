@@ -1,3 +1,4 @@
+export ROOT_DIR=$(CURDIR)
 export DOCKER_REPO=flydiverny
 
 include ./docker.mk
