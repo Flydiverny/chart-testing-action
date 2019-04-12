@@ -1,4 +1,4 @@
-IMAGE_NAME=$(shell basename $(CURDIR))
+IMAGE_NAME=chart-testing-action
 
 .PHONY: docker-lint
 docker-lint: ## Run Dockerfile Lint on all dockerfiles.
