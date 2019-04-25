@@ -1,4 +1,4 @@
-FROM quay.io/helmpack/chart-testing:v2.3.2
+FROM quay.io/helmpack/chart-testing:v2.3.3
 LABEL "name"="chart-testing-action"
 LABEL "maintainer"="Markus Maga <markus@maga.se>"
 LABEL "version"="1.0.2"
