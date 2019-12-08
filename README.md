@@ -1,3 +1,7 @@
+# DEPRECATED
+
+See https://github.com/helm/chart-testing-action for official actions!
+ 
 # chart-testing action
 GitHub action to run [helm/chart-testing](https://github.com/helm/chart-testing)
 
